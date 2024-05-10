@@ -201,10 +201,10 @@ void __fastcall TDM::InitializeDatabase() {
 void TDM::SetupOracleConnection() {
     FDConnection1->Params->Clear();
     FDConnection1->DriverName = "Ora";
-    FDConnection1->Params->Add("User_Name=ADMIN");
-    FDConnection1->Params->Add("Password=or2804AIGenHelp!");
-    FDConnection1->Params->Add("Database=lszhhrkltyacm7p4_high");
-    FDConnection1->Params->Add("WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY=C:\\Users\\hamoz\\OneDrive\\Desktop\\Wallet_LSZHHRKLTYACM7P4)))");
+    FDConnection1->Params->Add("User_Name=");
+    FDConnection1->Params->Add("Password=");
+    FDConnection1->Params->Add("Database=");
+    FDConnection1->Params->Add("WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY=C:\\)))");
     FDConnection1->LoginPrompt = false;
     try {
         FDConnection1->Open();
