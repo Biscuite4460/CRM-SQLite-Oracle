@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="Unit1.cpp"/>
+    <File Path="Unit1.cpp"/>
+    <File Path="Unit1.dfm"/>
+    <File Path="Unit1.h"/>
+    <File Path="uDataMod.cpp"/>
+    <File Path="uDataMod.cpp"/>
+    <File Path="uDataMod.dfm"/>
+    <File Path="uDataMod.h"/>
+    <File Path="uDraftProposal.cpp"/>
+    <File Path="uDraftProposal.cpp"/>
+    <File Path="uDraftProposal.dfm"/>
+    <File Path="uDraftProposal.h"/>
+    <File Path="uLeads.cpp"/>
+    <File Path="uLeads.cpp"/>
+    <File Path="uLeads.dfm"/>
+    <File Path="uLeads.h"/>
+    <File Path="uMainForm.cpp"/>
+    <File Path="uMainForm.cpp"/>
+    <File Path="uMainForm.dfm"/>
+    <File Path="uMainForm.h"/>
+    <File Path="uProposal.cpp"/>
+    <File Path="uProposal.cpp"/>
+    <File Path="uProposal.dfm"/>
+    <File Path="uProposal.h"/>
+    <File Path="Windows10CRMDemo.cpp"/>
+  </ProjectSortOrder>
+	<Transactions>
+    <Transaction>2024/04/19 10:01:09.000.781,=C:\Users\hamoz\OneDrive\Desktop\CMRProjectCopyCopyCopy\Unit1.cpp</Transaction>
+    <Transaction>2024/04/19 10:02:11.000.002,=C:\Users\hamoz\OneDrive\Desktop\CMRProjectCopyCopyCopy\Unit1.cpp</Transaction>
+    <Transaction>2024/04/19 10:02:36.000.610,=C:\Users\hamoz\OneDrive\Desktop\CMRProjectCopyCopyCopy\Unit1.cpp</Transaction>
+    <Transaction>2024/04/19 10:04:46.000.375,=C:\Users\hamoz\OneDrive\Desktop\CMRProjectCopyCopyCopy\Unit2.cpp</Transaction>
+    <Transaction>2024/04/19 10:05:54.000.294,C:\Users\hamoz\OneDrive\Desktop\CMRProjectCopyCopyCopy\Windows10CRMDemoPCH1.h=</Transaction>
+    <Transaction>2024/04/19 19:35:57.000.422,=C:\Users\hamoz\OneDrive\Desktop\CMRProjectCopyCopyCopy\Unit1.cpp</Transaction>
+    <Transaction>2024/04/19 19:41:16.000.477,C:\Users\hamoz\OneDrive\Desktop\CMRProjectCopyCopyCopy\Unit1.cpp=</Transaction>
+    <Transaction>2024/04/19 19:41:53.000.258,=C:\Users\hamoz\OneDrive\Desktop\CMRProjectCopyCopyCopy\Unit1.cpp</Transaction>
+  </Transactions>
+</BorlandProject>
