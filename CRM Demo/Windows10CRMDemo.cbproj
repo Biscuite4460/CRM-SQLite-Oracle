@@ -182,10 +182,10 @@
             <DependentOn>uMainForm.h</DependentOn>
             <BuildOrder>2</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Unit1.cpp">
+        <CppCompile Include="UOraDBForms.cpp">
             <Form>Form1</Form>
             <FormType>dfm</FormType>
-            <DependentOn>Unit1.h</DependentOn>
+            <DependentOn>UOraDBForms.h</DependentOn>
             <BuildOrder>6</BuildOrder>
         </CppCompile>
         <CppCompile Include="uProposal.cpp">
@@ -197,7 +197,7 @@
         <CppCompile Include="Windows10CRMDemo.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>
-        <FormResources Include="Unit1.dfm"/>
+        <FormResources Include="UOraDBForms.dfm"/>
         <FormResources Include="uProposal.dfm"/>
         <FormResources Include="uMainForm.dfm"/>
         <FormResources Include="uDataMod.dfm"/>

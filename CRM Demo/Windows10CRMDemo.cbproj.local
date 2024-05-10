@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<ProjectSortOrder AutoSort="0" SortType="0">
-    <File Path="Unit1.cpp"/>
-    <File Path="Unit1.cpp"/>
-    <File Path="Unit1.dfm"/>
-    <File Path="Unit1.h"/>
+    <File Path="UOraDBForms.cpp"/>
+    <File Path="UOraDBForms.cpp"/>
+    <File Path="UOraDBForms.dfm"/>
+    <File Path="UOraDBForms.h"/>
     <File Path="uDataMod.cpp"/>
     <File Path="uDataMod.cpp"/>
     <File Path="uDataMod.dfm"/>
@@ -36,5 +36,8 @@
     <Transaction>2024/04/19 19:35:57.000.422,=C:\Users\hamoz\OneDrive\Desktop\CMRProjectCopyCopyCopy\Unit1.cpp</Transaction>
     <Transaction>2024/04/19 19:41:16.000.477,C:\Users\hamoz\OneDrive\Desktop\CMRProjectCopyCopyCopy\Unit1.cpp=</Transaction>
     <Transaction>2024/04/19 19:41:53.000.258,=C:\Users\hamoz\OneDrive\Desktop\CMRProjectCopyCopyCopy\Unit1.cpp</Transaction>
+    <Transaction>2024/05/10 16:08:43.805,C:\Users\hamoz\OneDrive\Desktop\CMRProjectCopyCopyCopy\UOraDBForms.h=C:\Users\hamoz\OneDrive\Desktop\CMRProjectCopyCopyCopy\Unit1.h</Transaction>
+    <Transaction>2024/05/10 16:08:43.805,C:\Users\hamoz\OneDrive\Desktop\CMRProjectCopyCopyCopy\UOraDBForms.dfm=C:\Users\hamoz\OneDrive\Desktop\CMRProjectCopyCopyCopy\Unit1.dfm</Transaction>
+    <Transaction>2024/05/10 16:08:43.805,C:\Users\hamoz\OneDrive\Desktop\CMRProjectCopyCopyCopy\UOraDBForms.cpp=C:\Users\hamoz\OneDrive\Desktop\CMRProjectCopyCopyCopy\Unit1.cpp</Transaction>
   </Transactions>
 </BorlandProject>

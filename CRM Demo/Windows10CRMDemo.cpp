@@ -5,12 +5,13 @@
 //---------------------------------------------------------------------------
 #include <Vcl.Styles.hpp>
 #include <Vcl.Themes.hpp>
-USEFORM("uMainForm.cpp", MainForm);
+#include "UOraDBForms.h"
+USEFORM("UOraDBForms.cpp", Form1);
 USEFORM("uProposal.cpp", ProposalForm);
+USEFORM("uMainForm.cpp", MainForm);
 USEFORM("uDataMod.cpp", DM); /* TDataModule: File Type */
 USEFORM("uDraftProposal.cpp", DraftProposalForm);
 USEFORM("uLeads.cpp", LeadsForm);
-USEFORM("Unit1.cpp", Form1);
 //---------------------------------------------------------------------------
 int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {
@@ -20,17 +21,14 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
         TStyleManager::TrySetStyle("Windows10 Blue");
         Application->MainFormOnTaskBar = true;
 
-        Application->CreateForm(__classid(TDM), &DM); // Create the data module
-
-        // Initially create and show Form1
+        Application->CreateForm(__classid(TDM), &DM);
         Application->CreateForm(__classid(TForm1), &Form1);
-        Form1->ShowModal(); // Use ShowModal to wait until the form is closed
+		Form1->ShowModal();
 
-        // After Form1 is closed, create and show MainForm
-        if (Form1->ModalResult == mrOk) { // Check if Form1 closed with an 'OK' result
+        if (Form1->ModalResult == mrOk) {
             Application->CreateForm(__classid(TMainForm), &MainForm);
-            Application->MainForm = MainForm; // Set MainForm as the main application form
-            Application->Run(); // Start the main event loop
+            // Application->MainForm is set automatically if MainForm is created first
+            Application->Run();
         }
 
         ReportMemoryLeaksOnShutdown = true;
@@ -52,6 +50,7 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
     }
     return 0;
 }
+
 
 
 
