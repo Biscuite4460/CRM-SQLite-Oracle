@@ -1,8 +1,0 @@
-lszhhrkltyacm7p4_high = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.eu-milan-1.oraclecloud.com))(connect_data=(service_name=ga5769eeb212630_lszhhrkltyacm7p4_high.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
-
-lszhhrkltyacm7p4_low = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.eu-milan-1.oraclecloud.com))(connect_data=(service_name=ga5769eeb212630_lszhhrkltyacm7p4_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
-
-lszhhrkltyacm7p4_medium = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.eu-milan-1.oraclecloud.com))(connect_data=(service_name=ga5769eeb212630_lszhhrkltyacm7p4_medium.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
-
-
-
