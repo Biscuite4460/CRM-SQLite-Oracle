@@ -37,16 +37,6 @@ TDatabaseType TDM::GetDatabaseType() {
 	return FDBConfig.Type;
 }
 
-void TDM::SetDatabaseConfig(TDatabaseType dbType, const String &database,
-							const String &user, const String &password, const String &server)
-{
-	FDBConfig.Type = dbType;
-	FDBConfig.Database = database;
-	FDBConfig.Username = user;
-	FDBConfig.Password = password;
-	FDBConfig.Server = server;
-}
-
 void TDM::InitializeTable(TFDTable *ATable, TFDMemTable*AMemTable) {
     ATable->FieldDefs->Clear();
     if (FDBConfig.Type == dtSQLite) {
@@ -90,49 +80,49 @@ void TDM::ValidateOracleTableFields(TFDQuery* Query, TFDMemTable* MemTable, TFDT
         throw Exception("Query is not properly initialized or has no data.");
     }
 
-    for (int i = 0; i < MemTable->FieldDefs->Count; ++i) {
+	for (int i = 0; i < MemTable->FieldDefs->Count; ++i) {
         TFieldDef* memFieldDef = MemTable->FieldDefs->Items[i];
 
 		Query->First();
         bool found = false;
         while (!Query->Eof && !found) {
-            String colName = Query->FieldByName("column_name")->AsString;
+			String colName = Query->FieldByName("column_name")->AsString;
             String dataType = Query->FieldByName("data_type")->AsString;
             int charLength = Query->FieldByName("char_length")->AsInteger;
 
             if (colName.CompareIC(memFieldDef->Name) == 0) {
 				found = true;
-                if (!FieldTypesMatch(memFieldDef->DataType, dataType)) {
+				if (!FieldTypesMatch(memFieldDef->DataType, dataType)) {
 					//throw Exception("Data type mismatch for column " + memFieldDef->Name + ": expected " + dataType + ", found " + DataTypeToStr(memFieldDef->DataType));
 				}
                 if (memFieldDef->Size > 0 && memFieldDef->Size != charLength) {
-                    throw Exception("Character length mismatch for column " + memFieldDef->Name + ": expected " + IntToStr(charLength) + ", found " + IntToStr(memFieldDef->Size));
-                }
+					throw Exception("Character length mismatch for column " + memFieldDef->Name + ": expected " + IntToStr(charLength) + ", found " + IntToStr(memFieldDef->Size));
+				}
             }
 
-            Query->Next();
-        }
+			Query->Next();
+		}
 
-        if (!found) {
-            throw Exception("Column " + memFieldDef->Name + " not found in Oracle table.");
-        }
-    }
+		if (!found) {
+			throw Exception("Column " + memFieldDef->Name + " not found in Oracle table.");
+		}
+	}
 }
 
 bool TDM::FieldTypesMatch(TFieldType delphiFieldType, const String& oracleType) {
-    switch (delphiFieldType) {
-        case ftString:
-            return oracleType == "VARCHAR2" || oracleType == "CHAR";
-        case ftLargeint:
-        case ftInteger:
-            return oracleType == "NUMBER";
-        case ftFloat:
-            return oracleType == "FLOAT";
-        case ftDateTime:
+	switch (delphiFieldType) {
+		case ftString:
+			return oracleType == "VARCHAR2" || oracleType == "CHAR";
+		case ftLargeint:
+		case ftInteger:
+			return oracleType == "NUMBER";
+		case ftFloat:
+			return oracleType == "FLOAT";
+		case ftDateTime:
 			return oracleType == "DATE" || oracleType == "TIMESTAMP";
 		default:
 			return false;
-    }
+	}
 }
 
 String TDM::DataTypeToStr(TFieldType fieldType) {
@@ -146,21 +136,39 @@ String TDM::DataTypeToStr(TFieldType fieldType) {
 	}
 }
 
+struct DatabaseConfig1 {
+	TDatabaseType Type;
+	String Database;
+	String Username;
+	String Password;
+	String Server;
+};
+
+void TDM::SetDatabaseConfig(TDatabaseType dbType, const String &database,
+						   const String &user, const String &password,
+						   const String &server) {
+	FDBConfig.Type = dbType;
+	FDBConfig.Database = database;
+	FDBConfig.Username = user;
+	FDBConfig.Password = password;
+	FDBConfig.Server = server;
+}
+
 void __fastcall TDM::InitializeDatabase() {
   try {
 	if (FDBConfig.Type == dtSQLite) {
-      FDConnection1->DriverName = "SQLite";
-      FDConnection1->Params->Values[L"Database"] = DB_FILENAME;
-      FDConnection1->Open();
-      FDLocalSQL1->Active = true;
+	  FDConnection1->DriverName = "SQLite";
+	  FDConnection1->Params->Values[L"Database"] = DB_FILENAME;
+	  FDConnection1->Open();
+	  FDLocalSQL1->Active = true;
 
-      if (!FDConnection1->Connected) {
-        ShowMessage("SQLite database connection not established.");
-        return;
-      }
+	  if (!FDConnection1->Connected) {
+		ShowMessage("SQLite database connection not established.");
+		return;
+	  }
 
-      if (!TFile::Exists(DB_FILENAME)) {
-        try {
+	  if (!TFile::Exists(DB_FILENAME)) {
+		try {
 		  FDConnection1->Open();
 		  InitializeTable(DocsFDTable, DocsFDMemTable);
 		  InitializeTable(LeadsFDTable, LeadsFDMemTable);
@@ -168,55 +176,60 @@ void __fastcall TDM::InitializeDatabase() {
 		  InitializeTable(UsersFDTable, UsersFDMemTable);
 		  InitializeTable(ProposalsFDTable, ProposalFDMemTable);
 		} __finally {
-        }
+		}
 	  }
 	  SetTableNames();
-      OpenAllTables();
-
-    } else if (FDBConfig.Type == dtOracle) {
-      FDLocalSQL1->Active = false;
-      SetupOracleConnection();
-
-      if (!FDConnection1->Connected) {
-        ShowMessage("Oracle database connection not established.");
-        return;
-      }
-
-      SetTableNames();
 	  OpenAllTables();
+	  OpenAllQueries();
+
+	} else if (FDBConfig.Type == dtOracle) {
+	  FDLocalSQL1->Active = false;
+	  SetupOracleConnection(FDBConfig.Username, FDBConfig.Password);
+
+	  if (!FDConnection1->Connected) {
+		ShowMessage("Oracle database connection not established.");
+		return;
+	  }
+
+	  SetTableNames();
+	  OpenAllTables();
+	  OpenAllQueries();
 
 	  SetupOracleLeadsQueries();
 	  LinkDataSources();
-    }
+	}
 
 	if (UsersFDMemTable && UsersFDMemTable->Active && UsersFDMemTable->FindField("Username")) {
 	  SetUser(UsersFDMemTable->FieldByName("Username")->AsString);
 	}
 
   } catch (const Exception &E) {
-    ShowMessage("An exception occurred during database initialization: " + E.Message);
+	ShowMessage("An exception occurred during database initialization: " + E.Message);
   }
 }
 
-void TDM::SetupOracleConnection() {
-    FDConnection1->Params->Clear();
-    FDConnection1->DriverName = "Ora";
-    FDConnection1->Params->Add("User_Name=");
-    FDConnection1->Params->Add("Password=");
-    FDConnection1->Params->Add("Database=");
-    FDConnection1->Params->Add("WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY=C:\\)))");
-    FDConnection1->LoginPrompt = false;
-    try {
-        FDConnection1->Open();
-        if (FDConnection1->Connected)
-            ShowMessage("Oracle connection established successfully.");
-        else
-            ShowMessage("Failed to establish Oracle connection.");
-    } catch (const Exception &E) {
-        ShowMessage("Oracle connection error: " + E.Message);
-    }
+void TDM::SetupOracleConnection(String username, String password) {
+	if (!FDConnection1) {
+		ShowMessage("FDConnection1 is not initialized.");
+		return;
+	}
+	FDConnection1->Params->Clear();
+	FDConnection1->DriverName = "Ora";
+	FDConnection1->Params->Add("User_Name=" + username);
+	FDConnection1->Params->Add("Password=" + password);
+	FDConnection1->Params->Add("Database=lszhhrkltyacm7p4_high");
+	FDConnection1->Params->Add("WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY=C:\\Users\\hamoz\\OneDrive\\Desktop\\Wallet_LSZHHRKLTYACM7P4)))");
+	FDConnection1->LoginPrompt = false;
+	try {
+		FDConnection1->Open();
+		if (FDConnection1->Connected)
+			ShowMessage("Oracle connection established successfully.");
+		else
+			ShowMessage("Failed to establish Oracle connection.");
+	} catch (const Exception &E) {
+		ShowMessage("Oracle connection error: " + E.Message);
+	}
 }
-
 
 void TDM::SetTableNames() {
   LeadsFDTable->TableName = "Leads";
@@ -232,6 +245,11 @@ void TDM::OpenAllTables() {
   OpenTable(AcctFDTable);
   OpenTable(UsersFDTable);
   OpenTable(ProposalsFDTable);
+}
+
+void TDM::OpenAllQueries()
+{
+	OpenQuery(FDLeadsQueryNew);
 }
 
 void __fastcall TDM::OpenTable(TFDTable* ATable)
@@ -585,3 +603,19 @@ void TDM::ReloadLeadsQuery1(const String& username)
 
 	FDLeadsQueryNew->Open();
 }
+void TDM::ReloadEmailsQuery(const String& username)
+{
+    FDEmailsQuery->Close();
+    FDEmailsQuery->SQL->Clear();
+    FDEmailsQuery->Params->Clear();
+
+    // Ensure no syntax errors and correctly named parameters
+    FDEmailsQuery->SQL->Add("SELECT Email, Name FROM Leads WHERE Status <> 'Inactive' AND User = :Username");
+
+    FDEmailsQuery->Params->ParamByName("Username")->AsString = username;
+
+    FDEmailsQuery->Open();
+}
+
+//---------------------------------------------------------------------------
+

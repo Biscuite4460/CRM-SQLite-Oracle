@@ -351,7 +351,6 @@ private:	// User declarations
     bool ProposalFormVisible;
 	bool LeadsFormVisible;
 	// -----------------------------------------------------
-
 public:		// User declarations
 	__fastcall TMainForm(TComponent* Owner);
 	// -----
@@ -413,8 +412,10 @@ public:		// User declarations
 	void TMainForm::RefreshAccountGrid();
     void __fastcall TMainForm::FormShow(TObject *Sender);
 	void PopulateDBGrid();
-    String GetCurrentUsername();
+	String GetCurrentUsername();
 };
+
+	 void ForceForegroundWindow(HWND hwnd);
 
 //---------------------------------------------------------------------------
 

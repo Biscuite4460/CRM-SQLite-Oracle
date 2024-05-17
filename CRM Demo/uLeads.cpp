@@ -27,10 +27,25 @@ void __fastcall TLeadsForm::RefreshFormsPublic(){
 	Invalidate();
 }
 
-void __fastcall TLeadsForm::LocateLead( int AIndex )
+void __fastcall TLeadsForm::LocateLead(int AIndex)
 {
-  LeadsBindSourceDB->DataSet->Locate( L"LeadId", VarArrayOf( OPENARRAY(Variant, ( AIndex )) ), TLocateOptions() );
+    // Check if LeadsBindSourceDB and its DataSet are properly initialized
+    if (!LeadsBindSourceDB || !LeadsBindSourceDB->DataSet) {
+        ShowMessage("DataSource or DataSet is not properly initialized.");
+        return;  // Exit the function if the data source or dataset is not available
+    }
+
+    // Attempt to locate the record with exception handling
+    try {
+        bool found = LeadsBindSourceDB->DataSet->Locate(L"LeadId", VarArrayOf(OPENARRAY(Variant, (AIndex))), TLocateOptions());
+        if (!found) {
+            ShowMessage("Lead with specified ID not found.");
+        }
+    } catch (const Exception &e) {
+        ShowMessage("An exception occurred while trying to locate Lead: " + e.Message);
+    }
 }
+
 
 
 void __fastcall TLeadsForm::DateContactedPickerChange( TObject* Sender )

@@ -176,6 +176,12 @@
             <DependentOn>uLeads.h</DependentOn>
             <BuildOrder>4</BuildOrder>
         </CppCompile>
+        <CppCompile Include="ULoginForm.cpp">
+            <Form>LoginForm</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>ULoginForm.h</DependentOn>
+            <BuildOrder>7</BuildOrder>
+        </CppCompile>
         <CppCompile Include="uMainForm.cpp">
             <Form>MainForm</Form>
             <FormType>dfm</FormType>
@@ -183,7 +189,7 @@
             <BuildOrder>2</BuildOrder>
         </CppCompile>
         <CppCompile Include="UOraDBForms.cpp">
-            <Form>Form1</Form>
+            <Form>InitializationDBForm</Form>
             <FormType>dfm</FormType>
             <DependentOn>UOraDBForms.h</DependentOn>
             <BuildOrder>6</BuildOrder>
@@ -203,6 +209,7 @@
         <FormResources Include="uDataMod.dfm"/>
         <FormResources Include="uDraftProposal.dfm"/>
         <FormResources Include="uLeads.dfm"/>
+        <FormResources Include="ULoginForm.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

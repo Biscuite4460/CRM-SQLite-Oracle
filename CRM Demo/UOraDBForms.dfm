@@ -1,7 +1,7 @@
-object Form1: TForm1
+object InitializationDBForm: TInitializationDBForm
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'InitializationDBForm'
   ClientHeight = 445
   ClientWidth = 627
   Color = clBtnFace

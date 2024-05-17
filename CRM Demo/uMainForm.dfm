@@ -818,7 +818,7 @@ object MainForm: TMainForm
     Width = 937
     Height = 605
     Margins.Top = 10
-    ActivePage = ReportsTab
+    ActivePage = LeadsTab
     Align = alClient
     TabHeight = 30
     TabOrder = 1
@@ -842,7 +842,7 @@ object MainForm: TMainForm
           Left = 108
           Top = 5
           Width = 164
-          Height = 45
+          Height = 57
           Margins.Top = 5
           Margins.Bottom = 5
           Align = alLeft
@@ -854,6 +854,7 @@ object MainForm: TMainForm
           Font.Style = [fsBold]
           ParentFont = False
           Layout = tlCenter
+          ExplicitHeight = 45
         end
         object VirtualImage1: TVirtualImage
           Left = 0
@@ -1604,7 +1605,7 @@ object MainForm: TMainForm
           Left = 108
           Top = 5
           Width = 137
-          Height = 45
+          Height = 57
           Margins.Top = 5
           Margins.Bottom = 5
           Align = alLeft
@@ -1616,6 +1617,7 @@ object MainForm: TMainForm
           Font.Style = [fsBold]
           ParentFont = False
           Layout = tlCenter
+          ExplicitHeight = 45
         end
         object VirtualImage2: TVirtualImage
           Left = 0
@@ -1859,7 +1861,7 @@ object MainForm: TMainForm
           Left = 108
           Top = 5
           Width = 84
-          Height = 45
+          Height = 57
           Margins.Top = 5
           Margins.Bottom = 5
           Align = alLeft
@@ -1871,6 +1873,7 @@ object MainForm: TMainForm
           Font.Style = [fsBold]
           ParentFont = False
           Layout = tlCenter
+          ExplicitHeight = 45
         end
         object VirtualImage3: TVirtualImage
           Left = 0
@@ -2031,7 +2034,7 @@ object MainForm: TMainForm
         object Label27: TLabel
           Left = 1
           Top = 1
-          Width = 30
+          Width = 231
           Height = 19
           Align = alTop
           Alignment = taCenter
@@ -2042,6 +2045,7 @@ object MainForm: TMainForm
           Font.Name = 'Segoe UI'
           Font.Style = [fsBold]
           ParentFont = False
+          ExplicitWidth = 30
         end
         object NewLeadsSG: TStringGrid
           Tag = 3
@@ -2090,7 +2094,7 @@ object MainForm: TMainForm
         object Label28: TLabel
           Left = 1
           Top = 1
-          Width = 42
+          Width = 213
           Height = 19
           Align = alTop
           Alignment = taCenter
@@ -2101,6 +2105,7 @@ object MainForm: TMainForm
           Font.Name = 'Segoe UI'
           Font.Style = [fsBold]
           ParentFont = False
+          ExplicitWidth = 42
         end
         object ActiveLeadsSG: TStringGrid
           Tag = 5
@@ -2143,7 +2148,7 @@ object MainForm: TMainForm
         object Label29: TLabel
           Left = 1
           Top = 1
-          Width = 93
+          Width = 201
           Height = 19
           Align = alTop
           Alignment = taCenter
@@ -2154,6 +2159,7 @@ object MainForm: TMainForm
           Font.Name = 'Segoe UI'
           Font.Style = [fsBold]
           ParentFont = False
+          ExplicitWidth = 93
         end
         object ProposalSentLeadsSG: TStringGrid
           Tag = 3
@@ -2198,7 +2204,7 @@ object MainForm: TMainForm
         object Label30: TLabel
           Left = 1
           Top = 1
-          Width = 45
+          Width = 199
           Height = 19
           Align = alTop
           Alignment = taCenter
@@ -2209,6 +2215,7 @@ object MainForm: TMainForm
           Font.Name = 'Segoe UI'
           Font.Style = [fsBold]
           ParentFont = False
+          ExplicitWidth = 45
         end
         object ClosedLeadsSG: TStringGrid
           Tag = 3
@@ -2259,7 +2266,7 @@ object MainForm: TMainForm
           Left = 108
           Top = 5
           Width = 231
-          Height = 45
+          Height = 57
           Margins.Top = 5
           Margins.Bottom = 5
           Align = alLeft
@@ -2271,6 +2278,7 @@ object MainForm: TMainForm
           Font.Style = [fsBold]
           ParentFont = False
           Layout = tlCenter
+          ExplicitHeight = 45
         end
         object VirtualImage4: TVirtualImage
           Left = 0
@@ -2443,7 +2451,7 @@ object MainForm: TMainForm
           Left = 108
           Top = 5
           Width = 156
-          Height = 45
+          Height = 57
           Margins.Top = 5
           Margins.Bottom = 5
           Align = alLeft
@@ -2455,6 +2463,7 @@ object MainForm: TMainForm
           Font.Style = [fsBold]
           ParentFont = False
           Layout = tlCenter
+          ExplicitHeight = 45
         end
         object VirtualImage5: TVirtualImage
           Left = 0
@@ -2595,8 +2604,6 @@ object MainForm: TMainForm
         ParentFont = False
         SelectionMode = smMultiple
         TabOrder = 0
-        ExplicitWidth = 360
-        ExplicitHeight = 256
       end
       object Panel4: TPanel
         AlignWithMargins = True
@@ -2614,7 +2621,7 @@ object MainForm: TMainForm
           Left = 108
           Top = 5
           Width = 132
-          Height = 45
+          Height = 57
           Margins.Top = 5
           Margins.Bottom = 5
           Align = alLeft
@@ -2626,6 +2633,7 @@ object MainForm: TMainForm
           Font.Style = [fsBold]
           ParentFont = False
           Layout = tlCenter
+          ExplicitHeight = 45
         end
         object VirtualImage6: TVirtualImage
           Left = 0
@@ -2662,7 +2670,7 @@ object MainForm: TMainForm
           Left = 108
           Top = 5
           Width = 81
-          Height = 45
+          Height = 57
           Margins.Top = 5
           Margins.Bottom = 5
           Align = alLeft
@@ -2674,6 +2682,7 @@ object MainForm: TMainForm
           Font.Style = [fsBold]
           ParentFont = False
           Layout = tlCenter
+          ExplicitHeight = 45
         end
         object VirtualImage7: TVirtualImage
           Left = 0
@@ -3238,7 +3247,6 @@ object MainForm: TMainForm
     Width = 1143
     Height = 30
     CustomButtons = <>
-    ExplicitWidth = 624
     object UsernameComboBox: TComboBox
       AlignWithMargins = True
       Left = 855
@@ -3263,7 +3271,7 @@ object MainForm: TMainForm
       Left = 702
       Top = 7
       Width = 145
-      Height = 19
+      Height = 21
       Margins.Left = 4
       Margins.Top = 7
       Margins.Right = 4

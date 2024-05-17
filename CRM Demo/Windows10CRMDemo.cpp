@@ -5,13 +5,21 @@
 //---------------------------------------------------------------------------
 #include <Vcl.Styles.hpp>
 #include <Vcl.Themes.hpp>
+#include <Windows.h>
 #include "UOraDBForms.h"
-USEFORM("UOraDBForms.cpp", Form1);
+#include "ULoginForm.h"
+#include "uMainForm.h"
+#include "uDataMod.h"
+#include "uDraftProposal.h"
+#include "uLeads.h"
+#include "uProposal.h"
+USEFORM("UOraDBForms.cpp", InitializationDBForm);
 USEFORM("uProposal.cpp", ProposalForm);
 USEFORM("uMainForm.cpp", MainForm);
-USEFORM("uDataMod.cpp", DM); /* TDataModule: File Type */
+USEFORM("uDataMod.cpp", DM);
 USEFORM("uDraftProposal.cpp", DraftProposalForm);
 USEFORM("uLeads.cpp", LeadsForm);
+USEFORM("ULoginForm.cpp", LoginForm);
 //---------------------------------------------------------------------------
 int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {
@@ -22,36 +30,53 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
         Application->MainFormOnTaskBar = true;
 
         Application->CreateForm(__classid(TDM), &DM);
-        Application->CreateForm(__classid(TForm1), &Form1);
-		Form1->ShowModal();
+        Application->CreateForm(__classid(TInitializationDBForm), &InitializationDBForm);
+		Application->CreateForm(__classid(TLeadsForm), &LeadsForm);
+		Application->CreateForm(__classid(TDraftProposalForm), &DraftProposalForm);
+		Application->CreateForm(__classid(TProposalForm), &ProposalForm);
 
-        if (Form1->ModalResult == mrOk) {
-            Application->CreateForm(__classid(TMainForm), &MainForm);
-            // Application->MainForm is set automatically if MainForm is created first
-            Application->Run();
+		if (InitializationDBForm->ShowModal() == mrOk)
+        {
+            if (DM->FDBConfig.Type == dtOracle)
+            {
+                Application->CreateForm(__classid(TLoginForm), &LoginForm);
+                if (LoginForm->ShowModal() == mrOk)
+                {
+					Application->CreateForm(__classid(TMainForm), &MainForm);
+                    if (DM->FDConnection1->Connected) {
+                        MainForm->Show();
+						ForceForegroundWindow(MainForm->Handle);
+                    } else {
+						ShowMessage("Failed to connect to Oracle Database.");
+                    }
+                }
+            }
+            else if (DM->FDBConfig.Type == dtSQLite)
+            {
+				Application->CreateForm(__classid(TMainForm), &MainForm);
+
+                MainForm->Show();
+                ForceForegroundWindow(MainForm->Handle);
+            }
         }
 
-        ReportMemoryLeaksOnShutdown = true;
+		Application->Run();
+		ReportMemoryLeaksOnShutdown = true;
     }
     catch (Exception &exception)
     {
         Application->ShowException(&exception);
     }
+    catch (const std::exception& stdEx)
+    {
+        ShowMessage("Standard exception: " + String(stdEx.what()));
+    }
     catch (...)
     {
-        try
-        {
-            throw Exception("");
-        }
-        catch (Exception &exception)
-        {
-            Application->ShowException(&exception);
-        }
+        ShowMessage("An unknown exception occurred.");
     }
     return 0;
 }
 
-
-
-
 //---------------------------------------------------------------------------
+

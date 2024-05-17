@@ -106,9 +106,9 @@ __published:	// IDE-managed Components
 	void __fastcall FDLeadsQueryNewAfterScroll(TDataSet *DataSet);
 
 private:
-	DatabaseConfig FDBConfig;
 	TFDPhysOracleDriverLink *FDPhysOracleDriverLink1;
 public:
+DatabaseConfig FDBConfig;
   //  modified to choose between Oracle / SQLite
 void __fastcall TDM::InitializeDatabase();
 bool __fastcall TDM::FieldTypesMatch(TFieldType delphiFieldType, const String &oracleType);
@@ -138,9 +138,7 @@ bool __fastcall TDM::FieldTypesMatch(TFieldType delphiFieldType, const String &o
 	void InsertDataFromGrid(const String &tableName, TStringGrid *grid);
 	String GetDbColumnName(const String &gridHeader);
   // ------------------------------------------
-	void SetDatabaseConfig(TDatabaseType dbType, const String &database,
-                           const String &user = "", const String &password = "",
-						   const String &server = "");
+  void TDM::SetDatabaseConfig(TDatabaseType dbType, const String &database, const String &user, const String &password, const String &server);
   // ------------------------------------------
    TDatabaseType GetDatabaseType();
    void TDM::ValidateOracleTableFields(TFDQuery* checkTableQuery, TFDMemTable* AMemTable, TFDTable *ATable);
@@ -155,13 +153,16 @@ bool __fastcall TDM::FieldTypesMatch(TFieldType delphiFieldType, const String &o
 	void TDM::SetTableNames();
 	void TDM::LinkDataSources();
 	void TDM::SetupOracleLeadsQueries();
-	void TDM::SetupOracleConnection();
+	void TDM::SetupOracleConnection(String username, String password);
 	void __fastcall TDM::ReloadAllQueries();
 	void TDM::ReloadAccountQueries();
 	void TDM::ReloadProposalsQuaeries();
 	void ReloadLeadsQuery();
+	String TDM::GetFieldType(const String &headerName);
+	void TDM::ReloadEmailsQuery(const String& username);
 	void TDM::ReloadLeadsQuery1(const String& username);
-    String TDM::GetFieldType(const String &headerName);
+    void TDM::OpenAllQueries();
+
 };
 
 //---------------------------------------------------------------------------
